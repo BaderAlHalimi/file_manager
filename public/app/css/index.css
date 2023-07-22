@@ -1,0 +1,13 @@
+body{
+    background-color: #212529;
+}
+#joinButton{
+    color: white;
+    text-decoration: none;
+    background: linear-gradient(to left, rgb(251, 35, 35),rgb(5, 5, 255));
+    padding: 10px 20px;
+    border-radius: 25px;
+}
+#joinButton:hover{
+    background: linear-gradient(to left, rgb(248, 83, 83),rgb(88, 88, 255));
+}

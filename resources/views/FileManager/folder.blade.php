@@ -1,10 +1,14 @@
 @extends('layout.master')
 @section('content')
-    <div class="container">
+    <div class="container h-100">
         <div class="row justify-content-center align-items-center g-2">
             <?php
             $fls = Storage::disk('app')->files('/files/' . $url);
             ?>
+            <div class="order-first offset-md-4">
+                <a class="btn btn-outline-danger" href="{{ URL::temporarySignedRoute('download.folder',now()->addHours(1),['url'=>$fakeurl]) }}">Download all!</a>
+                <h3>{{ $name }}</h3>
+            </div>
             @foreach ($fls as $value)
                 <div class="col-4">
                     <div class="card text-start bg-dark">
@@ -12,9 +16,11 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ basename($value) }}</h5>
                             <p>folder: {{ $url }}</p>
-                            <a class="btn btn-outline-info" href="{{ Storage::disk('app')->url($value) }}"
-                                download>download</a>
-                            <button onclick="copy({{ route('share', ['url' => $url]) }})">share!, copy Link</button>
+                            <a class="btn btn-outline-info"
+                                href="{{ URL::temporarySignedRoute('download', now()->addHours(1), ['url' => $fakeurl, 'file' => basename($value)]) }}">download</a>
+                            <button class="btn btn-danger"
+                                onclick="copy('{{ URL::temporarySignedRoute('share', now()->addHours(24), ['url' => $fakeurl]) }}')">share!,
+                                copy Link</button>
                         </div>
                     </div>
                 </div>
@@ -39,7 +45,7 @@
             // إزالة العنصر من الصفحة (اختياري)
             document.body.removeChild(textarea);
 
-            console.log('تم نسخ النص بنجاح: ' + text);
+            alert('تم نسخ النص بنجاح: ' + text);
         }
     </script>
 @endsection

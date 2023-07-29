@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\UserController;
+use App\Models\File;
+use App\Models\Url;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +22,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('FileManager.index');
 })->name('home');
-
 Route::get('signup', function () {
     if (session('user_id')) {
         return redirect()->back();
@@ -36,4 +39,8 @@ Route::post('login', [UserController::class, 'index'])->name('User.get');
 Route::get('dashboard', [FileController::class, 'index'])->name('dashboard.index');
 Route::get('dashboard/create', [FileController::class, 'create'])->name('dashboard.create');
 Route::post('dashboard/create', [FileController::class, 'store'])->name('dashboard.store');
-Route::get('file/share/{url}', [FileController::class, 'share'])->name('share');
+Route::get('file/share/{url}', [FileController::class, 'share'])
+    ->middleware('signed')
+    ->name('share');
+Route::get('download/{url}/{file}', [DownloadController::class,'downloadFile'])->middleware('signed')->name('download');
+Route::get('download/{url}', [DownloadController::class,'downloadFolder'])->middleware('signed')->name('download.folder');

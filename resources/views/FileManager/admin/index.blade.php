@@ -20,9 +20,9 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{ basename($value) }}</h5>
                                     <p>folder: {{ $file->url }}</p>
-                                    <a class="btn btn-outline-info" href="{{ Storage::disk('app')->url($value) }}"
-                                        download>download</a>
-                                    <button class="" onclick="copy('{{ route('share', ['url' => $file->url]) }}')">share!,
+                                    <a class="btn btn-outline-info" href="{{URL::temporarySignedRoute('download',now()->addHours(1), ['url' => $file->fakeurl,'file'=>basename($value)]) }}"
+                                        >download</a>
+                                    <button class="btn btn-danger" onclick="copy('{{ URL::temporarySignedRoute('share',now()->addHours(24), ['url' => $file->fakeurl]) }}')">share!,
                                         copy Link</button>
                                 </div>
                             </div>
@@ -50,7 +50,7 @@
             // إزالة العنصر من الصفحة (اختياري)
             document.body.removeChild(textarea);
 
-            console.log('تم نسخ النص بنجاح: ' + text);
+            alert('تم نسخ النص بنجاح: ' + text);
         }
     </script>
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\FileRequest;
 use App\Models\File;
+use App\Models\Url;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -20,6 +21,7 @@ class FileController extends Controller
         }
         $files = array();
         foreach (File::where('user_id', session('user_id'))->get() as $file) {
+            $file['fakeurl'] = Url::where('file_id',$file->id)->latest()->first()->url;
             $files[] = $file;
         }
         return view('FileManager.admin.index', ['files' => $files]);
@@ -54,6 +56,7 @@ class FileController extends Controller
         $validated['url'] = $path;
         $validated['user_id'] = session('user_id');
         File::create($validated);
+        Url::create(['file_id'=>File::where('url',$path)->latest()->first()->id,'url'=>Str::random(20)]);
         return redirect()->route('dashboard.index')->with('success', 'Upload successfully!');
     }
 
@@ -90,6 +93,7 @@ class FileController extends Controller
     }
     public function share($url)
     {
-        return view('FileManager.folder',['url'=>$url]);
+        $file = File::find(Url::where('url', '=', $url)->latest()->first()->file_id)->first();
+        return view('FileManager.folder', ['url' => $file->url,'fakeurl'=>$url,'name'=>$file->name]);
     }
 }

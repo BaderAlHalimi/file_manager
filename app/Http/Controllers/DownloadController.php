@@ -12,24 +12,27 @@ class DownloadController extends Controller
     //
     function downloadFolder($url)
     {
-        $file_ = File::find(Url::where('url', $url)->latest()->first()->file_id)->first();
+        $file_ = File::where('id',Url::where('url', $url)->latest()->first()->file_id)->first();
         $url = $file_->url;
         $name = $file_->name;
-
+        
         $path = Storage::disk('app')->path('/files/' . $url);
         $zipFileName = $name . '.zip';
         $zip = new \ZipArchive;
         $zip->open($path . '/' . $zipFileName, \ZipArchive::CREATE);
-
-
+        
+        
         $files = Storage::disk('app')->files('/files/' . $url);
         foreach ($files as $file) {
             # code...
             $zip->addFile($path . '/' . basename($file), basename($file));
         }
+        $path = $zip->filename;
         $zip->close();
-
-        return response()->download($path . '/' . $zipFileName)->deleteFileAfterSend(true);
+        // dd($path);
+        session()->flash('downloadsuccess', 'true');
+        
+        return response()->download($path)->deleteFileAfterSend(true);
 
         // return response()->download($path, $file);
     }

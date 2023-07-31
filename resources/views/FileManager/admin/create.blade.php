@@ -142,7 +142,7 @@
                     <button id="filebtn" onclick="fileButtonClicked()" class="btn btn-primary btn-lg">Browse for your
                         pic!</button>
                     <!--this is the actual file input, is set with opacity=0 beacause we wanna see our custom one-->
-                    <input type="file" multiple name="file[]" id="file" hidden required>
+                    <input type="file" class="m-0 p-0" multiple name="file[]" id="file" hidden required>
                 </div>
             </div>
         </div>
@@ -153,6 +153,19 @@
                 <div class="col-md-12">
                     <!--the defauld disabled btn and the actual one shown only if the three fields are valid-->
                     <div id="files" class="form-floating mb-3">
+                    </div>
+                    <div class="form-floating mb-3">
+                        <div class="card" hidden>
+                            <div class="card-body text-dark">
+                                <div id="item1" class="alert alert-dark m-0" style="text-align: left;" role="alert">
+                                    <strong>Alert Heading</strong> Alert Content
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card bg-dark btn-container m-0 p-0">
+                            <div id="items" class="card-body text-dark m-0">
+                            </div>
+                        </div>
                     </div>
                     <div class="form-floating mb-3">
                         <input type="text" @class(['form-control', 'is-invalid' => $errors->has('name')]) value="{{ old('name') }}" name="name"
@@ -178,6 +191,7 @@
     <script>
         // FileSelected = [];
         i = 0;
+        var element;
 
         function fileButtonClicked() {
             document.getElementById("file").click();
@@ -185,12 +199,19 @@
         document.getElementById("file").addEventListener("change", function(event) {
             // document.getElementById("filebtn").classList.add('disabled');
             var newFiles = event.target.files;
-            var element = document.getElementById("files").appendChild(document.getElementById("file").cloneNode(
+            element = document.getElementById("files").appendChild(document.getElementById("file").cloneNode(
                 true));
+            files = element.files;
+            for (let i = 0; i < files.length; i++) {
+                const name = files[i].name;
+                var item = document.getElementById("item1");
+                item.innerHTML = name;
+                var element1 = document.getElementById("items").appendChild(item.cloneNode(true));
+            }
             // `
         // <input type="file" value=${newFiles} name="file[]" id="${i}" />
         // `
-            document.getElementById("namefile").innerHTML = "<span class='text-danger'>file selected!</span>";
+            // document.getElementById("namefile").innerHTML = "<span class='text-danger'>file selected!</span>";
         });
     </script>
 @endpush

@@ -19,6 +19,7 @@ class UserController extends Controller
         } else {
             if (Hash::check($request->password, $user->password)) {
                 session()->put('user_id', $user->id);
+                $request->session()->flash('login_success', 'login successfully');
                 return redirect()->route('home');
             } else {
                 abort(404);

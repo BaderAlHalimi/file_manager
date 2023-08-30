@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\FileRequest;
 use App\Models\File;
 use App\Models\Url;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -100,6 +101,7 @@ class FileController extends Controller
     public function share($url)
     {
         $file = File::where('id', Url::where('url', '=', $url)->latest()->first()->file_id)->first();
-        return view('FileManager.folder', ['url' => $file->url, 'fakeurl' => $url, 'name' => $file->name]);
+        $user = User::where('id',$file->user_id)->first();
+        return view('FileManager.folder', ['url' => $file->url, 'fakeurl' => $url, 'name' => $file->name,'user'=>$user->name]);
     }
 }

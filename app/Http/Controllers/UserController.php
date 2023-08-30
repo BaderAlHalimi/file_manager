@@ -15,7 +15,7 @@ class UserController extends Controller
         $user = User::where('email', $request->email)->first();
         // echo $user->password;
         if (!$user) {
-            abort(404);
+            return redirect()->route('User.login',['error'=>'email not found'])->withInput();
         } else {
             if (Hash::check($request->password, $user->password)) {
                 session()->put('user_id', $user->id);

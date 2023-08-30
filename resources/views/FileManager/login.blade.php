@@ -19,6 +19,12 @@
                                             <div class="form-outline form-floating flex-fill mb-0">
                                                 <input type="email" id="email" name="email" class="form-control" placeholder="Your Email" />
                                                 <label class="form-label" for="email">Your Email</label>
+                                                @isset($email)
+                                                    <div class="alert alert-primary" role="alert">
+                                                        <strong>{{ $email }}</strong>
+                                                    </div>
+                                                    
+                                                @endisset
                                             </div>
                                         </div>
 

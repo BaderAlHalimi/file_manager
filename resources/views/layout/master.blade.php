@@ -1,7 +1,7 @@
 <html lang="en">
 
 <head>
-    <title>Title</title>
+    <title>مشارك الملفات</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,12 +13,12 @@
     @stack('styles')
 </head>
 
-<body>
+<body dir="rtl">
     <header>
         <!-- place navbar here -->
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand" href="{{ route('home') }}">File manager</a>
+                <a class="navbar-brand" href="{{ route('home') }}">مشارك الملفات</a>
                 <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
                     data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -27,17 +27,17 @@
                 <div class="collapse navbar-collapse" id="collapsibleNavId">
                     <ul class="navbar-nav me-auto mt-2 mt-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{ route('home') }}" aria-current="page">Home</a>
+                            <a class="nav-link active" href="{{ route('home') }}" aria-current="page">الصفحة الرئيسية</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('dashboard.index') }}">Dashboard</a>
+                            <a class="nav-link" href="{{ route('dashboard.index') }}">لوحة التحكم</a>
                         </li>
                     </ul>
                     @if (!session('user_id'))
-                        <a href="{{ route('User.login') }}" class="btn btn-success my-2 my-sm-0 mx-2">Login</a>
-                        <a href="{{ route('User.store') }}" class="btn btn-outline-success my-2 my-sm-0">Sign up</a>
+                        <a href="{{ route('User.login') }}" class="btn btn-success my-2 my-sm-0 mx-2">تسجيل الدخول</a>
+                        <a href="{{ route('User.store') }}" class="btn btn-outline-success my-2 my-sm-0">إنشاء حساب</a>
                     @else
-                        <a href="{{ route('User.logout') }}" class="btn btn-outline-danger my-2 my-sm-0 mx-2">Logout</a>
+                        <a href="{{ route('User.logout') }}" class="btn btn-outline-danger my-2 my-sm-0 mx-2">تسجيل الخروج</a>
                     @endif
                 </div>
             </div>

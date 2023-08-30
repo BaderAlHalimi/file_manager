@@ -5,21 +5,26 @@
             <?php
             $fls = Storage::disk('app')->files('/files/' . $url);
             ?>
-            <div class="order-first offset-md-4">
-                <a class="btn btn-outline-danger" href="{{ URL::temporarySignedRoute('download.folder',now()->addHours(1),['url'=>$fakeurl]) }}"><i class="fa-solid fa-download"></i> Download all</a>
-                <h3>{{ $name }}</h3>
+            <div class="container my-5">
+                <div class="order-first offset-md-4">
+                    <a class="btn btn-outline-danger"
+                        href="{{ URL::temporarySignedRoute('download.folder', now()->addHours(1), ['url' => $fakeurl]) }}"><i
+                            class="fa-solid fa-download"></i> Download all</a>
+                    <h3>{{ $name }}</h3>
+                </div>
             </div>
             @foreach ($fls as $value)
                 <div class="col-4">
                     <div class="card bg-dark btn-container border-light d-flex">
                         <div class="card-body">
                             <h5 class="card-title" style="height: 50px; overflow: hidden;">{{ basename($value) }}</h5>
-                            <p>folder: {{ $name }}</p>
+                            <p>الناشر: {{ $user }}</p>
                             <a class="btn btn-outline-info"
-                                href="{{ URL::temporarySignedRoute('download', now()->addHours(1), ['url' => $fakeurl, 'file' => basename($value)]) }}"><i class="fa-solid fa-download"></i> download</a>
+                                href="{{ URL::temporarySignedRoute('download', now()->addHours(1), ['url' => $fakeurl, 'file' => basename($value)]) }}"><i
+                                    class="fa-solid fa-download"></i> تحميل</a>
                             <button class="btn btn-danger"
                                 onclick="copy('{{ URL::temporarySignedRoute('share', now()->addHours(24), ['url' => $fakeurl]) }}')"><i
-                                class="fa-solid fa-share-from-square"></i> share</button>
+                                    class="fa-solid fa-share-from-square"></i> مشاركة</button>
                         </div>
                     </div>
                 </div>
@@ -47,6 +52,7 @@
             // alert('تم نسخ النص بنجاح: ' + text);
             sharemessage();
         }
+
         function sharemessage() {
             const Toast = Swal.mixin({
                 toast: true,

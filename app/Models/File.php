@@ -16,5 +16,10 @@ class File extends Model
         'name',
         'url',
         'user_id',
+        'downloads'
     ];
+    public function downloadsRelation()
+    {
+        return $this->hasMany(Download::class);
+    }
 }

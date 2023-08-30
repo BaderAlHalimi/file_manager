@@ -2,19 +2,19 @@
 
 @section('content')
     <link rel="stylesheet" href="{{ Storage::disk('public')->url('css/index.css') }}">
-    <div class="container">
+    <div class="container my-5">
         <div class="row justify-content-center align-items-top g-2">
             <div class="col">
-                <h2 class="mt-5">File Manager System</h2>
-                <p>A file storage and sharing system enables secure storage and easy sharing of personal files online,
-                    promoting organization, collaboration, and productivity. Users can upload various files, create links
-                    for sharing, and adjust privacy settings for access control. The user-friendly interface ensures smooth
-                    file management and data protection through encryption.<br>
-                    <span>Developed by: <a href="https://mostaql.com/u/BaderHalimi">Bader Al-Din
+                <h2 class="mt-5">نظام مشاركة الملفات</h2>
+                <p>يتيح نظام تخزين الملفات ومشاركتها التخزين الآمن والمشاركة السهلة للملفات الشخصية عبر الإنترنت ،
+                    تعزيز التنظيم والتعاون والإنتاجية. يمكن للمستخدمين تحميل ملفات مختلفة وإنشاء روابط
+                    للمشاركة وضبط إعدادات الخصوصية للتحكم في الوصول. تضمن الواجهة سهلة الاستخدام السلاسة
+                    إدارة الملفات وحماية البيانات من خلال التشفير.<br>
+                    <span>طوِّر بواسطة: <a href="https://mostaql.com/u/BaderHalimi">Bader Al-Din
                             Al-Halimi</a></span>
                 </p>
                 @if (!session('user_id'))
-                    <a id="joinButton" href="{{ route('signup') }}">Join now!</a>
+                    <a id="joinButton" href="{{ route('signup') }}">إنضم الآن!</a>
                 @else
                     <a class="btn btn-outline-danger" href="{{ route('dashboard.index') }}"><i
                             class="fa-solid fa-sliders"></i> Dashboard</a>
